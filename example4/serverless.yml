@@ -1,0 +1,22 @@
+service: example3
+
+provider:
+  name: kubeless
+  hostname: localhost
+  runtime: nodejs6
+  ingress:
+    class: "traefik"
+    annotations:
+      kubernetes.io/ingress.class: traefik
+      traefik.ingress.kubernetes.io/rewrite-target: /
+
+plugins:
+  - serverless-kubeless
+
+functions:
+  capitalize:
+    handler: handler.capitalize
+    events:
+      - http:
+          path: /capitalize
+      - trigger: 'topic'

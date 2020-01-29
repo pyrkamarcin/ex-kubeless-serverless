@@ -1,0 +1,15 @@
+service: python-hello
+
+provider:
+  name: kubeless
+  runtime: python3.7
+
+plugins:
+  - serverless-kubeless
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
